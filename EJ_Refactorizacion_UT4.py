@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
 # Clase abstracta para representar una receta
-class receta(ABC):
-    def __init__(self, n, i, p):
-        self.n = n  # nombre
-        self.i = i  # ingredientes
-        self.p = p  # pasos
+class Receta(ABC):
+    def __init__(self, nombre, ingrediente, pasos):
+        self.nombre = nombre  # nombre
+        self.ingredientes = ingrediente  # ingredientes
+        self.pasos = pasos  # pasos
 
     @abstractmethod
     def mostrar(self):
@@ -13,60 +13,60 @@ class receta(ABC):
 
 
 # Clase para recetas vegetarianas
-class recV(receta):
+class RecetasVegetarianas(Receta):
     def mostrar(self):
-        print(f"Receta vegetariana: {self.n}")
+        print(f"Receta vegetariana: {self.nombre}")
         print("Ingredientes:")
-        for ing in self.i:
-            print(f"- {ing}")
+        for ingrediente in self.ingredientes:
+            print(f"- {ingrediente}")
         print("Pasos:")
-        for paso in self.p:
+        for paso in self.pasos:
             print(f"{paso}")
 
 
 # Clase para recetas no vegetarianas
-class recNV(receta):
+class RecetasNoVegetarianas(Receta):
     def mostrar(self):
-        print(f"Receta NO vegetariana: {self.n}")
+        print(f"Receta NO vegetariana: {self.nombre}")
         print("Ingredientes:")
-        for ing in self.i:
-            print(f"- {ing}")
+        for ingrediente in self.ingredientes:
+            print(f"- {ingrediente}")
         print("Pasos:")
-        for paso in self.p:
+        for paso in self.pasos:
             print(f"{paso}")
 
 
 # Clase con utilidades del restaurante
-class utilidades:
+class Utilidades:
     @staticmethod
-    def imprimir_receta(r):
+    def imprimir_receta(receta):
         print("====================================")
-        r.mostrar()
+        receta.mostrar()
         print("====================================")
 
     @staticmethod
-    def mostrar_lista_ingredientes(lista):
-        for l in lista:
-            print(f"* {l}")
+    def mostrar_lista_ingredientes(ingredientes):
+        for ingrediente in ingredientes:
+            print(f"* {ingrediente}")
 
 # Función principal
 def principal():
-    r1 = recV("Ensalada César", ["lechuga", "queso", "pan tostado", "salsa"], ["Lavar", "Mezclar", "Servir"])
-    r2 = recNV("Pollo al horno", ["pollo", "patatas", "ajo", "aceite"], ["Preparar", "Hornear", "Servir"])
+    receta1 = RecetasVegetarianas("Ensalada César", ["lechuga", "queso", "pan tostado", "salsa"], ["Lavar", "Mezclar", "Servir"])
+    receta2 = RecetasNoVegetarianas("Pollo al horno", ["pollo", "patatas", "ajo", "aceite"], ["Preparar", "Hornear", "Servir"])
     
     # Duplicación de código al imprimir
     print("== Mostrar recetas ==")
-    utilidades.imprimir_receta(r1)
-    utilidades.imprimir_receta(r2)
+    Utilidades.imprimir_receta(receta1)
+    Utilidades.imprimir_receta(receta2)
 
     # Código duplicado para mostrar ingredientes
     print("Ingredientes de Ensalada César:")
-    for ing in r1.i:
-        print(f"* {ing}")
+    for ingrediente in receta1.ingredientes:
+        print(f"* {ingrediente}")
     
     print("Ingredientes de Pollo al horno:")
-    for ing in r2.i:
-        print(f"* {ing}")
+    for ingrediente in receta2.ingredientes:
+        print(f"* {ingrediente}")
 
 
 # Ejecutar el programa
