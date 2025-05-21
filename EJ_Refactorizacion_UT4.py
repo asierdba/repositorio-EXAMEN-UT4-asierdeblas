@@ -46,8 +46,35 @@ class Utilidades:
         for ingrediente in receta.ingredientes:
             print(f"* {ingrediente}")
 
+    @staticmethod
+    def crear_receta(eleccion):
+        salir = ""
+        ingredientes = []
+        pasos = []
+    
+        nombre = input("Nombre de la receta: ")
+        while salir != "s":
+            ingrediente = str(input("Añade un ingrediente: "))
+            ingredientes.append(ingrediente)
+            salir = str(input("¿Quieres salir? (Pulsa 's'):"))
+        salir = ""
+        while salir != "s":
+            paso = str(input("Añade un paso: "))
+            pasos.append(paso)
+            salir = str(input("¿Quieres salir? (Pulsa 's'): "))
+
+        if eleccion.lower() == "vegetarianas":
+            receta = RecetasVegetarianas(nombre, ingrediente, pasos)
+        elif eleccion.lower() == "carnivoras":
+            receta = RecetasNoVegetarianas(nombre, ingrediente, pasos)
+        
+        return receta
+
 # Función principal
 def principal():
+
+    tipo_receta = str(input("¿Qué tipo de receta quieres crear? (Vegetariana / Carnivoras): "))
+    Utilidades.crear_receta(tipo_receta)
     receta1 = RecetasVegetarianas("Ensalada César", ["lechuga", "queso", "pan tostado", "salsa"], ["Lavar", "Mezclar", "Servir"])
     receta2 = RecetasNoVegetarianas("Pollo al horno", ["pollo", "patatas", "ajo", "aceite"], ["Preparar", "Hornear", "Servir"])
     
