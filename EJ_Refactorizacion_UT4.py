@@ -63,27 +63,41 @@ class Utilidades:
             pasos.append(paso)
             salir = str(input("¿Quieres salir? (Pulsa 's'): "))
 
-        if eleccion.lower() == "vegetarianas":
-            receta = RecetasVegetarianas(nombre, ingrediente, pasos)
-        elif eleccion.lower() == "carnivoras":
-            receta = RecetasNoVegetarianas(nombre, ingrediente, pasos)
+        if eleccion.lower() == "vegetariana":
+            receta = RecetasVegetarianas(nombre, ingredientes, pasos)
+        elif eleccion.lower() == "carnivora":
+            receta = RecetasNoVegetarianas(nombre, ingredientes, pasos)
         
         return receta
 
 # Función principal
 def principal():
+    recetas = []
 
-    tipo_receta = str(input("¿Qué tipo de receta quieres crear? (Vegetariana / Carnivoras): "))
-    Utilidades.crear_receta(tipo_receta)
-    receta1 = RecetasVegetarianas("Ensalada César", ["lechuga", "queso", "pan tostado", "salsa"], ["Lavar", "Mezclar", "Servir"])
-    receta2 = RecetasNoVegetarianas("Pollo al horno", ["pollo", "patatas", "ajo", "aceite"], ["Preparar", "Hornear", "Servir"])
-    
-    print("== Mostrar recetas ==")
-    Utilidades.imprimir_receta(receta1)
-    Utilidades.imprimir_receta(receta2)
+    while True:
 
-    Utilidades.mostrar_lista_ingredientes(receta1)
-    Utilidades.mostrar_lista_ingredientes(receta2)
+        opcion = str(input("¿Quieres crear/imprimir/ingredientes/salir una receta?: "))
+        
+        match opcion.lower():
+
+            case "crear":
+                tipo_receta = str(input("¿Qué tipo de receta quieres crear? (Vegetariana / Carnivora): "))
+                receta = Utilidades.crear_receta(tipo_receta)
+                recetas.append(receta)
+
+            case "imprimir":
+                for receta in recetas:
+                    Utilidades.imprimir_receta(receta)
+
+            case "ingredientes":
+                for receta in recetas:
+                    Utilidades.mostrar_lista_ingredientes(receta)
+
+            case "salir":
+                break
+
+            case _:
+                print("Opción no válida")
 
 
 # Ejecutar el programa
